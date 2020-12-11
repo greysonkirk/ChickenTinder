@@ -31,16 +31,17 @@ module.exports = function (app) {
   })
 
   app.post('/api/profile', (req, res) => {
-    db.User.update({
-      email: req.body.email,
-      password: req.body.password
-    })
-      .then(() => {
-        res.redirect(307, '/api/login')
+    const isAuth = req.isAuthenticated()
+    if (isAuth) {
+      console.log(req.user.id)
+      db.UserProfile.create({
+        userID: req.user.id,
+        email: req.user.email,
+        userName: req.body.username,
+        zip: req.body.zip,
+        partnerID: req.body.partnerID
       })
-      .catch(err => {
-        res.status(401).json(err)
-      })
+    }
   })
 
   // Route for logging user out
