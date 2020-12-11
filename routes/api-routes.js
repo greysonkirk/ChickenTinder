@@ -35,11 +35,11 @@ module.exports = function (app) {
     if (isAuth) {
       console.log(req.user.id)
       db.UserProfile.create({
-        userID: req.user.id,
+        UserId: req.user.id,
         email: req.user.email,
         userName: req.body.username,
-        zip: req.body.zip,
-        partnerID: req.body.partnerID
+        zipCode: req.body.zip,
+        partnerId: req.body.partnerID
       })
     }
   })

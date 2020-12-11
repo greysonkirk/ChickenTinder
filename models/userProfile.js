@@ -19,17 +19,17 @@ module.exports = function(sequelize, DataTypes) {
             }
         },
         zipCode: {
-            type: DataTypes.STRING,
-            validate: { isINT: true }
+            type: DataTypes.INTEGER
+            
         },
         partnerId: {
-            type: DataTypes.INTEGER,
-            validate: { isINT: true }
+            type: DataTypes.INTEGER
+           
         }
     })
 
     UserProfile.associate = function(models) {
-            models.UserProfile.belongsTo(models.User, {
+            UserProfile.belongsTo(models.User, {
                 onDelete: 'CASCADE',
                 foreignKey: {
                     allowNull: false
