@@ -1,4 +1,16 @@
 form.signup,
 form.login {
-  margin-top: 50px;
+    margin-top: 50px;
+}
+
+.restName {
+    position: relative;
+    bottom: 50px;
+    right: -5px;
+}
+
+.restName span {
+    background-color: darkred;
+    padding-left: 5px;
+    padding-right: 5px;
 }
