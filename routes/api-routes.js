@@ -95,17 +95,22 @@ module.exports = function (app) {
         })
     })
   })
-  app.post('/api/zomato/restaurant/:restId', (req, res) => {
+  app.post('/api/zomato/:restChoice', (req, res) => {
+    const restChoice = req.params.restChoice
+    console.log(restChoice)
     db.UserProfile.findOne({
       where: {
         UserId: req.user.id
       }
     }).then(UserProfile => {
-      db.userChoice.create({
+      console.log(restChoice + '  second')
+      db.UserChoice.create({
         userId: req.user.id,
         partnerId: UserProfile.partnerId,
-        restId: req.restId
-      })
+        restaurantId: restChoice
+      }
+
+      )
     })
   })
 }
