@@ -55,20 +55,20 @@ function buildSwipe (choices) {
       <p>${choices[i].restHours}</p>
       <p><a id="icon" href="tel:${choices[i].restPhone}">${choices[i].restPhone}<a/></p>
       <p><a href="${choices[i].restMenu}" target="_blank">Menu</a></p>
-      <div class="text-center">
-                <a href="#carouselExampleControls" role="button" data-bs-slide="next">
-                    <div id="yum" class="btn btn-success btn-hover">Yes,Please!!</div>
-                </a>
-            </div>
   </div>`
     $(swipe).appendTo('.carousel-inner')
   }
 }
 yumBtn.on('click', event => {
   event.preventDefault()
-  const restChoice = $('#restDisplay').data('value')
+  const restChoice = $('.active').data('value')
   console.log(restChoice)
-  $.ajax({ url: `/api/zomato/restaurant/${restChoice}` })
+  $.ajax({
+    url: `/api/zomato/${restChoice}`,
+    method: 'POST',
+    data: jQuery.param(restChoice)
+
+  })
     .then((data) => {
       console.log(data)
     })
