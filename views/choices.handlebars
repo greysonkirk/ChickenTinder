@@ -1,8 +1,30 @@
 choices page
 <div class="swiper-container">
     <div class="swiper-wrapper">
-        {{#each choices}}
-        {{> choices/choice-block}}
-        {{/each}}
+
     </div>
+
+    <div class="swiper-scrollbar"></div>
 </div>
+<script src="https://unpkg.com/swiper/swiper-bundle.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+ 
+        // Navigation arrows
+        navigation: {
+            nextEl: '#yuck',
+            prevEl: '#yum',
+        },
+
+        // And if we need scrollbar
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+    })
+</script>
+<script src="/js/choices.js"></script>

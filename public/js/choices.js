@@ -1,11 +1,12 @@
 getRest()
 
 const choices = []
+
 function getRest () {
-  const lat = 30.326374
-  const lng = -97.771258
+  // const lat = 30.326374
+  // const lng = -97.771258
   $.ajax({
-    url: `https://developers.zomato.com/api/v2.1/search?count=10&lat=${lat}&lon=%20${lng}`,
+    url: 'https://developers.zomato.com/api/v2.1/search?count=10&lat=30.326374&lon=%20-97.771258',
     headers: {
       'user-key': '31549f18a4409b92a3243bf922d7853a',
       Accept: 'application/json'
@@ -38,5 +39,24 @@ function getRest () {
       })
     }
     console.log(choices)
+    buildSwipe()
   })
+}
+
+function buildSwipe () {
+  for (let i = 0; i < choices.length; i++) {
+    const swipe = `<div class="swiper-slide"><img class="restImg" src='${choices[i].restThumb}'></img>
+        <div class="restName"><span>${choices[i].restName}</span></div>
+        <p>${choices[i].restCuisines} <span class="rounded" style="background-color:#${choices[i].ratingColor}; padding-left: 3px;padding-right: 3px;"; font-size: 20px;"> ${choices[i].restRating}</span></p>
+        <p>${choices[i].restAddress}</p>
+        <p>${choices[i].restHours}</p>
+        <p><a id="icon" href="tel:${choices[i].restPhone}">${choices[i].restPhone}<a/></p>
+        <p><a href="${choices[i].restMenu}" target="_blank">Menu</a></p>
+        <div class="buttons text-center">
+            <div id="yum" class="btn btn-success btn-hover">Yummy!</div>
+            <div id="#yuck" class="btn btn-danger btn-hover">Yuck!</div>
+        </div>
+    </div>`
+    $(swipe).appendTo('.swiper-wrapper')
+  }
 }
