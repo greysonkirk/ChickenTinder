@@ -1,1 +1,12 @@
-<div class="swiper-slide">${restThumb}<div class-"restName"><span>${restName}</span></div> </div>
+<div class="swiper-slide"><img class="restImg" src='${choices[i].restThumb}'></img>
+        <div class="restName"><span>${choices[i].restName}</span></div>
+        <p>${choices[i].restCuisines} <span class="rounded" style="background-color:#${choices[i].ratingColor}; padding-left: 3px;padding-right: 3px;"; font-size: 20px;"> ${choices[i].restRating}</span></p>
+        <p>${choices[i].restAddress}</p>
+        <p>${choices[i].restHours}</p>
+        <p><a id="icon" href="tel:${choices[i].restPhone}">${choices[i].restPhone}<a/></p>
+        <p><a href="${choices[i].restMenu}" target="_blank">Menu</a></p>
+        <div class="buttons text-center">
+            <div class="btn btn-success btn-hover">Yummy!</div>
+            <div class="btn btn-danger btn-hover">Yuck!</div>
+        </div>
+    </div>
