@@ -16,7 +16,7 @@ $(document).ready(() => {
       data: post
     })
       .then(function () {
-        window.location.href = '/index'
+        window.location.href = '/choices'
       })
   }
 
@@ -39,5 +39,6 @@ $(document).ready(() => {
     // Otherwise run submitPost to create a whole new post
 
     updateProfile(newProfile)
+    window.location.href = '/choices'
   })
 })
