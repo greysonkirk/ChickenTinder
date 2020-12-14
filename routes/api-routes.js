@@ -95,4 +95,17 @@ module.exports = function (app) {
         })
     })
   })
+  app.post('/api/zomato/restaurant/:restId', (req, res) => {
+    db.UserProfile.findOne({
+      where: {
+        UserId: req.user.id
+      }
+    }).then(UserProfile => {
+      db.userChoice.create({
+        userId: req.user.id,
+        partnerId: UserProfile.partnerId,
+        restId: req.restId
+      })
+    })
+  })
 }
