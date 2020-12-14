@@ -1,6 +1,7 @@
 // Requiring our models and passport as we've configured it
 const db = require('../models')
 const passport = require('../config/passport')
+const fetch = require('node-fetch')
 
 module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -63,5 +64,35 @@ module.exports = function (app) {
         id: req.user.id
       })
     }
+  })
+
+  app.get('/api/zomato/:lat/:long', (req, res) => {
+    console.log(req.user)
+    db.UserProfile.findOne({
+      where: {
+        UserId: req.user.id
+      }
+    }).then(userProfile => {
+      console.log(userProfile.zipCode)
+      return db.Location.findOne({
+        where: {
+          Zip: userProfile.zipCode
+        }
+      })
+
+        .then(data => {
+          console.log(data.Latitude)
+          fetch(`https://developers.zomato.com/api/v2.1/search?count=10&lat=${data.Latitude}&lon=%20${data.Longitude}`, {
+            method: 'GET',
+            headers: {
+              'user-key': process.env.APIKEY,
+              Accept: 'application/json'
+            }
+          }).then(response => response.json()).then(data => {
+            console.log(data)
+            res.json(data)
+          })
+        })
+    })
   })
 }
