@@ -1,4 +1,5 @@
 getRest()
+const yumBtn = $('#yum')
 
 function getRest () {
   // const lat = 30.326374
@@ -45,8 +46,8 @@ function buildSwipe (choices) {
   for (let i = 0; i < choices.length; i++) {
     let active = ''
     if (i === 0) { active = 'active' }
-    console.log(i)
-    const swipe = `<div class="carousel-item ${active}" data-bs-touch="true" value="${choices[i].restId}">
+    console.log()
+    const swipe = `<div id="restDisplay" class="carousel-item ${active}" data-bs-touch="true" data-value="${choices[i].restId}">
       <img src='${choices[i].restThumb}' class="d-block w-100">
       <div class="restName"><span>${choices[i].restName}</span></div>
       <p>${choices[i].restCuisines} <span class="rounded" style="background-color:#${choices[i].ratingColor}; padding-left: 3px;padding-right: 3px;"; font-size: 20px;"> ${choices[i].restRating}</span></p>
@@ -54,7 +55,21 @@ function buildSwipe (choices) {
       <p>${choices[i].restHours}</p>
       <p><a id="icon" href="tel:${choices[i].restPhone}">${choices[i].restPhone}<a/></p>
       <p><a href="${choices[i].restMenu}" target="_blank">Menu</a></p>
+      <div class="text-center">
+                <a href="#carouselExampleControls" role="button" data-bs-slide="next">
+                    <div id="yum" class="btn btn-success btn-hover">Yes,Please!!</div>
+                </a>
+            </div>
   </div>`
     $(swipe).appendTo('.carousel-inner')
   }
 }
+yumBtn.on('click', event => {
+  event.preventDefault()
+  const restChoice = $('#restDisplay').data('value')
+  console.log(restChoice)
+  $.ajax({ url: `/api/zomato/restaurant/${restChoice}` })
+    .then((data) => {
+      console.log(data)
+    })
+})
