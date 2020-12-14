@@ -3,14 +3,35 @@ form.login {
     margin-top: 50px;
 }
 
+.swiper-container {
+    height: 500px;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid;
+    border-color: tomato;
+    background-color: #f5eceb;
+}
 .restName {
     position: relative;
+    color: whitesmoke;
     bottom: 50px;
     right: -5px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: larger;
+    font-weight: bold;
 }
-
 .restName span {
     background-color: darkred;
     padding-left: 5px;
     padding-right: 5px;
+}
+.restImg {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+p {
+    margin: 0;
 }
