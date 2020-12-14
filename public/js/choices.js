@@ -1,17 +1,13 @@
 getRest()
-
 const choices = []
 
 function getRest () {
   // const lat = 30.326374
   // const lng = -97.771258
   $.ajax({
-    url: 'https://developers.zomato.com/api/v2.1/search?count=10&lat=30.326374&lon=%20-97.771258',
-    headers: {
-      'user-key': '31549f18a4409b92a3243bf922d7853a',
-      Accept: 'application/json'
-    }
+    url: '/api/zomato/30.326374/-97.771258'
   }).then((restaurants) => {
+    console.log(restaurants)
     for (let i = 0; i < restaurants.restaurants.length; i++) {
       const restName = restaurants.restaurants[i].restaurant.name
       let restThumb = restaurants.restaurants[i].restaurant.thumb
@@ -54,7 +50,7 @@ function buildSwipe () {
         <p><a href="${choices[i].restMenu}" target="_blank">Menu</a></p>
         <div class="buttons text-center">
             <div id="yum" class="btn btn-success btn-hover">Yummy!</div>
-            <div id="#yuck" class="btn btn-danger btn-hover">Yuck!</div>
+            <div id="yuck" class="btn btn-danger btn-hover">Yuck!</div>
         </div>
     </div>`
     $(swipe).appendTo('.swiper-wrapper')
