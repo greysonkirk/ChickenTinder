@@ -1,5 +1,6 @@
 getRest()
 const yumBtn = $('#yum')
+const matchBtn = $('#matches')
 
 function getRest () {
   // const lat = 30.326374
@@ -47,9 +48,9 @@ function buildSwipe (choices) {
     let active = ''
     if (i === 0) { active = 'active' }
     console.log()
-    const swipe = `<div id="restDisplay" class="carousel-item ${active}" data-bs-touch="true" data-value="${choices[i].restId}">
-      <img src='${choices[i].restThumb}' class="d-block w-100">
-      <div class="restName"><span>${choices[i].restName}</span></div>
+    const swipe = `<div id="restDisplay" class="carousel-item ${active}" data-bs-touch="true" data-value="${choices[i].restId}" data-img="${choices[i].restThumb}" data-name="${choices[i].restName}">
+      <img src='${choices[i].restThumb}' class="d-block w-100" >
+      <div class="restName" ><span>${choices[i].restName}</span></div>
       <p>${choices[i].restCuisines} <span class="rounded" style="background-color:#${choices[i].ratingColor}; padding-left: 3px;padding-right: 3px;"; font-size: 20px;"> ${choices[i].restRating}</span></p>
       <p>${choices[i].restAddress}</p>
       <p>${choices[i].restHours}</p>
@@ -62,10 +63,29 @@ function buildSwipe (choices) {
 yumBtn.on('click', event => {
   event.preventDefault()
   const restChoice = $('.active').data('value')
+  const restImg = $('.active').data('img')
+  const restName = $('.active').data('name')
   console.log(restChoice)
+  console.log(restImg)
+  console.log(restName)
+  console.log($('.active'))
   $.ajax({
-    url: `/api/zomato/${restChoice}`,
+    url: '/api/zomato/choice',
     method: 'POST',
-    data: jQuery.param(restChoice)
+    data: jQuery.param({ restChoice, restImg, restName })
   })
+  $.ajax({
+    url: '/api/matches',
+    method: 'GET'
+  }).then(
+    (data) => {
+      if (data.length > 1) {
+        document.getElementById('matches').style.visibility = 'visible'
+      }
+    }
+  )
+})
+
+matchBtn.on('click', event => {
+  window.location.replace('/matched')
 })

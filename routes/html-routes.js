@@ -35,4 +35,8 @@ module.exports = function (app) {
   app.get('/choices', isAuthenticated, (req, res) => {
     res.render('choices')
   })
+
+  app.get('/matched', isAuthenticated, (req, res) => {
+    res.render('matched')
+  })
 }
