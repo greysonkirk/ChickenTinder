@@ -1,5 +1,6 @@
 getRest()
 const yumBtn = $('#yum')
+const matchBtn = $('#matches')
 
 function getRest () {
   // const lat = 30.326374
@@ -68,4 +69,18 @@ yumBtn.on('click', event => {
     method: 'POST',
     data: jQuery.param(restChoice)
   })
+  $.ajax({
+    url: '/api/matches',
+    method: 'GET'
+  }).then(
+    (data) => {
+      if (data.length > 1) {
+        document.getElementById('matches').style.visibility = 'visible'
+      }
+    }
+  )
+})
+
+matchBtn.on('click', event => {
+  window.location.replace('/matched')
 })

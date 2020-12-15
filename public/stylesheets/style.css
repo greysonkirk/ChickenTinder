@@ -43,6 +43,11 @@ p {
 }
 
 #matches {
+<<<<<<< HEAD
+    margin-top: 5px;
+    visibility: hidden;
+}
+=======
     display: none;
 }
 
@@ -67,3 +72,4 @@ body {
   .restName{
       width: 400px;
   }
+>>>>>>> main

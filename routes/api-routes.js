@@ -135,10 +135,10 @@ module.exports = function (app) {
   })
 
   app.get('/api/matched', (req, res) => {
-    db.sequelize.query(`SELECT distinct c.userId, c.partnerId, c.restaurantId FROM zenponvyjembt7t5.UserChoices c
-        inner join zenponvyjembt7t5.UserChoices u on c.userId = u.partnerId and c.restaurantId = u.restaurantId
-        where c.userId = ?`, {
-      replacements: [req.user.id]
+    db.Matches.findAll({
+      where: {
+        UserId: req.user.id
+      }
     }).then((res) => console.log(res))
   })
 
@@ -147,6 +147,6 @@ module.exports = function (app) {
       where: {
         UserId: req.user.id
       }
-    }).then((Matches) => console.log(Matches))
+    }).then((data) => res.json(data))
   })
 }
