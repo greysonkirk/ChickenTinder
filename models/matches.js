@@ -22,6 +22,20 @@ module.exports = function(sequelize, DataTypes) {
             validate: {
                 isNumeric: true
             }
+        },
+        restaurantImg: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isNumeric: true
+            }
+        },
+        restaurantName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                isNumeric: true
+            }
         }
     })
 

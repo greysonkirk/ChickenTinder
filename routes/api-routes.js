@@ -143,7 +143,7 @@ module.exports = function (app) {
       where: {
         UserId: req.user.id
       }
-    }).then((res) => console.log(res))
+    }).then((data) => res.json(data))
   })
 
   app.get('/api/matches', (req, res) => {

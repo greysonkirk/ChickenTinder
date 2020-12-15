@@ -2,36 +2,19 @@ getRestMatches()
 
 function getRestMatches () {
   $.ajax({
-    url: '/api/zomato/16949716'
+    url: '/api/matched',
+    method: 'GET'
   }).then((restaurants) => {
     const choices = []
     console.log(restaurants)
-    for (let i = 0; i < restaurants.restaurants.length; i++) {
-      const restId = restaurants.restaurants[i].restaurant.id
-      const restName = restaurants.restaurants[i].restaurant.name
-      let restThumb = restaurants.restaurants[i].restaurant.thumb
-      const restAddress = restaurants.restaurants[i].restaurant.location.address
-      const restHours = restaurants.restaurants[i].restaurant.timings
-      const restRating = restaurants.restaurants[i].restaurant.user_rating.rating_text
-      const restPhone = restaurants.restaurants[i].restaurant.phone_numbers
-      const ratingColor =
-                restaurants.restaurants[i].restaurant.user_rating.rating_color
-      const restMenu = restaurants.restaurants[i].restaurant.menu_url
-      const restCuisines = restaurants.restaurants[0].restaurant.cuisines
-      if (restThumb.length < 1) {
-        restThumb = 'https://via.placeholder.com/250x250'
-      }
+    for (let i = 0; i < restaurants.length; i++) {
+      const { restId, restName, restImg } = restaurants[i]
+      console.log(restaurants[i])
       choices.push({
         restId,
         restName,
-        restThumb,
-        restAddress,
-        restHours,
-        restRating,
-        restPhone,
-        restMenu,
-        ratingColor,
-        restCuisines
+        restImg
+
       })
     }
     console.log(choices)
