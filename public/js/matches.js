@@ -1,11 +1,8 @@
-getRest()
-const yumBtn = $('#yum')
+getRestMatches()
 
-function getRest () {
-  // const lat = 30.326374
-  // const lng = -97.771258
+function getRestMatches () {
   $.ajax({
-    url: '/api/zomato/30.326374/-97.771258'
+    url: '/api/zomato/16949716'
   }).then((restaurants) => {
     const choices = []
     console.log(restaurants)
@@ -38,11 +35,11 @@ function getRest () {
       })
     }
     console.log(choices)
-    buildSwipe(choices)
+    buildMatches(choices)
   })
 }
 
-function buildSwipe (choices) {
+function buildMatches (choices) {
   for (let i = 0; i < choices.length; i++) {
     let active = ''
     if (i === 0) { active = 'active' }
@@ -59,13 +56,3 @@ function buildSwipe (choices) {
     $(swipe).appendTo('.carousel-inner')
   }
 }
-yumBtn.on('click', event => {
-  event.preventDefault()
-  const restChoice = $('.active').data('value')
-  console.log(restChoice)
-  $.ajax({
-    url: `/api/zomato/${restChoice}`,
-    method: 'POST',
-    data: jQuery.param(restChoice)
-  })
-})
