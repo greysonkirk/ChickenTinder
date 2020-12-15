@@ -79,7 +79,7 @@ yumBtn.on('click', event => {
     method: 'GET'
   }).then(
     (data) => {
-      if (data.length > 1) {
+      if (data.length >= 1) {
         document.getElementById('matches').style.visibility = 'visible'
       }
     }
