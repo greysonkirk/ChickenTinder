@@ -116,8 +116,10 @@ module.exports = function (app) {
     })
   })
 
-  app.post('/api/zomato/:restChoice', (req, res) => {
-    const restChoice = req.params.restChoice
+  app.post('/api/zomato/choice', (req, res) => {
+    const restChoice = req.body.restChoice
+    const restImg = req.body.restImg
+    const restName = req.body.restName
 
     db.UserProfile.findOne({
       where: {
@@ -127,11 +129,13 @@ module.exports = function (app) {
       db.UserChoice.create({
         userId: req.user.id,
         partnerId: UserProfile.partnerId,
-        restaurantId: restChoice
+        restaurantId: restChoice,
+        restaurantImg: restImg,
+        restaurantName: restName
       }
 
       )
-    })
+    }).then((data) => res.json(data))
   })
 
   app.get('/api/matched', (req, res) => {
