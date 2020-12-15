@@ -41,5 +41,6 @@ p {
 }
 
 #matches {
-    display: none;
+    margin-top: 5px;
+    visibility: hidden;
 }
