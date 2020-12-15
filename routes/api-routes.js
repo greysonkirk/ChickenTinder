@@ -2,6 +2,7 @@
 const db = require('../models')
 const passport = require('../config/passport')
 const fetch = require('node-fetch')
+// const sequelize = require('sequelize')
 
 module.exports = function (app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -89,21 +90,40 @@ module.exports = function (app) {
               Accept: 'application/json'
             }
           }).then(response => response.json()).then(data => {
-            console.log(data)
             res.json(data)
           })
         })
     })
   })
+  // Getting the Matching Restuarants
+  app.get('/api/zomato/:restID', (req, res) => {
+    console.log(req.user)
+    db.Matches.findAll({
+      where: {
+        UserId: req.user.id
+      }
+    }).then(data => {
+      console.log(data.Latitude)
+      fetch(`https://developers.zomato.com/api/v2.1/search?count=10&lat=${data.Latitude}&lon=%20${data.Longitude}`, {
+        method: 'GET',
+        headers: {
+          'user-key': process.env.APIKEY,
+          Accept: 'application/json'
+        }
+      }).then(response => response.json()).then(data => {
+        res.json(data)
+      })
+    })
+  })
+
   app.post('/api/zomato/:restChoice', (req, res) => {
     const restChoice = req.params.restChoice
-    console.log(restChoice)
+
     db.UserProfile.findOne({
       where: {
         UserId: req.user.id
       }
     }).then(UserProfile => {
-      console.log(restChoice + '  second')
       db.UserChoice.create({
         userId: req.user.id,
         partnerId: UserProfile.partnerId,
@@ -112,5 +132,21 @@ module.exports = function (app) {
 
       )
     })
+  })
+
+  app.get('/api/matched', (req, res) => {
+    db.sequelize.query(`SELECT distinct c.userId, c.partnerId, c.restaurantId FROM zenponvyjembt7t5.UserChoices c
+        inner join zenponvyjembt7t5.UserChoices u on c.userId = u.partnerId and c.restaurantId = u.restaurantId
+        where c.userId = ?`, {
+      replacements: [req.user.id]
+    }).then((res) => console.log(res))
+  })
+
+  app.get('/api/matches', (req, res) => {
+    db.Matches.findAll({
+      where: {
+        UserId: req.user.id
+      }
+    }).then((Matches) => console.log(Matches))
   })
 }

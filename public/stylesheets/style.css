@@ -39,3 +39,7 @@ form.login {
 p {
     margin: 0;
 }
+
+#matches {
+    display: none;
+}
