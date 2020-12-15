@@ -58,37 +58,35 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: 120%;
-<<<<<<< HEAD
- 
-  }
-  #navId{
-      background-color:rgb(255, 34, 34);
-      width:100%;
-     
-  }
-  .restName{
-      width: 400px;
-  }
-
-  .navbar-brand{
-      padding-left: 3%;
-      color: black;
-  }
-  .navbar-toggler-icon{
-      color: black;
-  }
-  .nav-link{
-      color: black;
-  }
-=======
+    background-color: blanchedalmond;
 }
 
-.container-fluid {
-    background-color: rgb(255, 34, 34);
+#navId {
+    background-color: rgb(224, 82, 57);
     width: 100%;
 }
 
 .restName {
     width: 400px;
 }
->>>>>>> f82429233ba1b55df0394529a721d1aa18b28344
+
+.navbar-brand {
+    padding-left: 3%;
+    color: black;
+}
+
+.navbar-toggler-icon {
+    color: black;
+}
+
+.nav-link {
+    color: black;
+}
+
+#infoText {
+    display: flex;
+}
+
+.content {
+    display: flex;
+}
