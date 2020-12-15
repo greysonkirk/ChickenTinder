@@ -59,11 +59,22 @@ body {
     background-size: 120%;
  
   }
-  .container-fluid{
+  #navId{
       background-color:rgb(255, 34, 34);
       width:100%;
      
   }
   .restName{
       width: 400px;
+  }
+
+  .navbar-brand{
+      padding-left: 3%;
+      color: black;
+  }
+  .navbar-toggler-icon{
+      color: black;
+  }
+  .nav-link{
+      color: black;
   }
