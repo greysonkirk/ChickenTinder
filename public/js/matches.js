@@ -29,7 +29,7 @@ function buildMatches (choices) {
     if (i === 0) { active = 'active' }
     console.log()
     const swipe = `<div id="restDisplay" class="carousel-item ${active}" data-bs-touch="true" data-value="${choices[i].restaurantId}">
-      <img src='${choices[i].restaurantImg}' class="d-block w-100">
+      <img src='${choices[i].restaurantImg}' class="d-block w-100" style="padding-top:4px;>
       <div class="restName"><span>${choices[i].restaurantName}</span></div>
   </div>`
     $(swipe).appendTo('.carousel-inner')
